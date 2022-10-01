@@ -15,6 +15,8 @@ public class PlayerHandler : MonoBehaviour
     private int facing = 1;
     private bool grounded;
     private bool acting;
+    private float jumpLockout;
+    private const float JUMP_LOCK = 0.1f;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,11 +27,6 @@ public class PlayerHandler : MonoBehaviour
     void FixedUpdate()
     {
         grounded = ground.CheckGrounded();
-        
-
-        if (InputHandler.Instance.jump.pressed && grounded) {
-            jump.StartJump();
-        }
 
         if (InputHandler.Instance.move.pressed && !acting) {
             move.StartAcceleration(InputHandler.Instance.dir);
@@ -50,16 +47,24 @@ public class PlayerHandler : MonoBehaviour
                 move.StartDeceleration();
             } else {
                 animator.SetTrigger("roll");
-                move.OverrideCurve(20, rollCurve, InputHandler.Instance.dir);
+                move.OverrideCurve(30, rollCurve, InputHandler.Instance.dir);
                 acting = true;
             }
+        } else if (InputHandler.Instance.primary.pressed && !acting) {
+
+        } else if (InputHandler.Instance.secondary.pressed && !acting) {
+
+        } else if (InputHandler.Instance.jump.pressed && grounded && !acting) {
+            jump.StartJump();
+            jumpLockout = Time.time + JUMP_LOCK;
+            animator.SetTrigger("jump");
         }
 
-        sprite.flipX = facing == -1;
-
-
-        animator.SetBool("grounded", grounded);
+        animator.SetBool("grounded", Time.time >= jumpLockout && grounded);
         animator.SetBool("running", InputHandler.Instance.dir != 0 && !acting);
+
+        sprite.flipX = facing == -1;
+    
     }
 
 
