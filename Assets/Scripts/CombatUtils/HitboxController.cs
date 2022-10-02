@@ -6,11 +6,16 @@ using System;
 public class HitboxController : MonoBehaviour
 {
     [SerializeField] HitboxData attackData;
-    private bool destroyOnHit;
+    bool destroyOnHit;
     Collider2D owner;
-    public void Init(Collider2D owner, bool destroyOnHit) {
+    ParticleType particle;
+    bool createsParticleOnHit;
+    public void Init(Collider2D owner, bool destroyOnHit, ParticleType particle = ParticleType.DEFAULT) {
         this.owner = owner;
         this.destroyOnHit = destroyOnHit;
+        this.particle = particle;
+        if (particle != ParticleType.DEFAULT)
+            createsParticleOnHit = true;;
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
@@ -18,12 +23,21 @@ public class HitboxController : MonoBehaviour
             return;
 
         if (other.transform.parent.TryGetComponent(out PlayerHandler player))
-            player.OnHit(attackData);
-        else if (other.transform.parent.TryGetComponent(out CombatController target))
-            target.OnHit(attackData);
-        
-        if (destroyOnHit)
+            player.OnHit(attackData, other);
+        else if (other.transform.parent.TryGetComponent(out CombatController target)) {
+            target.OnHit(attackData, other);
+            if (transform.parent != null && transform.parent.TryGetComponent(out PlayerHandler attackingPlayer))
+                attackingPlayer.HitPause(0.15f);
+        }
+
+        if (createsParticleOnHit) {
+            Vector2 dif = other.transform.position - transform.position;
+            VFXHandler.Instance.ParticleBuilder(particle, (Vector2)transform.position + 0.5f * dif, true, flipX: dif.x < 0);
+        }
+
+        if (this.destroyOnHit) {
             Destroy(gameObject);
+        }
     }
 }
 

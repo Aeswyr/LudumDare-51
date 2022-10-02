@@ -205,6 +205,11 @@ MonoBehaviour:
   particleTemplate: {fileID: 1429471637093195980, guid: 53d18d4659f17e440bb69caf1c7f84c5, type: 3}
   particles:
   - {fileID: 7400000, guid: 4fd7ac59ac99660459d191807a9f2db6, type: 2}
+  - {fileID: 7400000, guid: 84263743d8d5f4f4aa65a246c0de72e6, type: 2}
+  - {fileID: 7400000, guid: ca7844a1202188a4f897acbd61c938de, type: 2}
+  - {fileID: 7400000, guid: 898aef5f1140d4e4eae91d6f2159a7ca, type: 2}
+  - {fileID: 7400000, guid: cc030741575657941a3d55db6f25f8be, type: 2}
+  - {fileID: 7400000, guid: 874fee2064edb0547ba1d10abafe85c0, type: 2}
 --- !u!114 &3108092611064485999
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -218,7 +223,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   templateAttack: {fileID: 4664909146082386197, guid: f4c8988dbb10b23428ff53da23ab281c, type: 3}
-  attacks: []
+  attacks:
+  - {fileID: 22100000, guid: 9f05ecba6ea98b44c928ef79eec175b2, type: 2}
+  - {fileID: 22100000, guid: 0caef8a058ed6d74ba8171e3692140ac, type: 2}
 --- !u!114 &6380050328034810660
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,0 +1,13 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Projectile_Fire
+  m_Controller: {fileID: 9100000, guid: 473da6bdc55b3164eb0d59cb97d83705, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 937ab6df3461e7a41a183ae946fbbbc0, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 1ee07cad9dbdd7b4b800afe79aec16f1, type: 2}
