@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1240271404209423945
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4800950660076812324}
+  m_Layer: 0
+  m_Name: MoteHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4800950660076812324
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1240271404209423945}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4707435507531593776}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1843599745331289624
 GameObject:
   m_ObjectHideFlags: 0
@@ -95,6 +126,7 @@ Transform:
   m_Children:
   - {fileID: 6447000400600222995}
   - {fileID: 6974311113017296285}
+  - {fileID: 4800950660076812324}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -136,8 +168,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -305422423
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 6a762e286e43b3f45ac2c85dd7be4060, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -187,6 +219,8 @@ MonoBehaviour:
   ground: {fileID: 1029658263641505088}
   sprite: {fileID: 6105714293034950207}
   animator: {fileID: 7489565913497517132}
+  hurtbox: {fileID: 5077807567567806148}
+  moteHolder: {fileID: 4800950660076812324}
   rollCurve:
     serializedVersion: 2
     m_Curve:
@@ -244,6 +278,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  moteTemplate: {fileID: 1196510932877550346, guid: 30a1cb153b9947c4f898148712f23505, type: 3}
 --- !u!50 &3789905405911222430
 Rigidbody2D:
   serializedVersion: 4

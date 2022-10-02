@@ -10,9 +10,13 @@ public class DestroyAfterDelay : MonoBehaviour
         lifetime += Time.time;
     }
 
+    public void Init(float time) {
+        lifetime = time;
+    }
+
     void FixedUpdate()
     {
         if (Time.time > lifetime)
-            Destroy(this.gameObject);
+            Destroy(gameObject);
     }
 }

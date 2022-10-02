@@ -41,3 +41,21 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background
+    uniqueID: 3955452197
+    locked: 0
+  - name: Motes
+    uniqueID: 2998487723
+    locked: 0
+  - name: Entity
+    uniqueID: 3989544873
+    locked: 0
+  - name: World
+    uniqueID: 1847793699
+    locked: 0
+  - name: VFX
+    uniqueID: 2523662571
+    locked: 0
+  - name: UI
+    uniqueID: 4063986723
+    locked: 0

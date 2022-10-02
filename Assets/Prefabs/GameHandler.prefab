@@ -11,6 +11,9 @@ GameObject:
   - component: {fileID: 7810765076816279616}
   - component: {fileID: -2664883524405368541}
   - component: {fileID: 1270362344671178572}
+  - component: {fileID: 2036659202853476937}
+  - component: {fileID: 3108092611064485999}
+  - component: {fileID: 6380050328034810660}
   m_Layer: 0
   m_Name: GameHandler
   m_TagString: Untagged
@@ -187,3 +190,44 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &2036659202853476937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6556217678783547664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c91f8ab5fc3883c4ca2fc243d827143f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particleTemplate: {fileID: 1429471637093195980, guid: 53d18d4659f17e440bb69caf1c7f84c5, type: 3}
+  particles:
+  - {fileID: 7400000, guid: 4fd7ac59ac99660459d191807a9f2db6, type: 2}
+--- !u!114 &3108092611064485999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6556217678783547664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc603bbb25dd4b843a1c99ca801774c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  templateAttack: {fileID: 4664909146082386197, guid: f4c8988dbb10b23428ff53da23ab281c, type: 3}
+  attacks: []
+--- !u!114 &6380050328034810660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6556217678783547664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b80c2ca4f7b1914da20b9d941bbee54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
