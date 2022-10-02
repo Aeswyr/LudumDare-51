@@ -12,6 +12,7 @@ public class PlayerHandler : MonoBehaviour
 
     [Header("ActionData")]
     [SerializeField] private AnimationCurve rollCurve;
+    [SerializeField] private AnimationCurve attackCurve;
     private int facing = 1;
     private bool grounded;
     private bool acting;
@@ -51,9 +52,14 @@ public class PlayerHandler : MonoBehaviour
                 acting = true;
             }
         } else if (InputHandler.Instance.primary.pressed && !acting) {
-
+            animator.SetTrigger("attack");
+            if (InputHandler.Instance.dir != 0)
+                move.OverrideCurve(30, attackCurve, InputHandler.Instance.dir);
+            acting = true;
         } else if (InputHandler.Instance.secondary.pressed && !acting) {
-
+            animator.SetTrigger("cast");
+            move.StartDeceleration();
+            acting = true;
         } else if (InputHandler.Instance.jump.pressed && grounded && !acting) {
             jump.StartJump();
             jumpLockout = Time.time + JUMP_LOCK;

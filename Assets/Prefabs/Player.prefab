@@ -220,6 +220,30 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  attackCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: -5.7508354
+      outSlope: -5.7508354
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.040562913
+    - serializedVersion: 3
+      time: 0.33333334
+      value: 0.2
+      inSlope: -0.36835116
+      outSlope: -0.36835116
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.042218596
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!50 &3789905405911222430
 Rigidbody2D:
   serializedVersion: 4

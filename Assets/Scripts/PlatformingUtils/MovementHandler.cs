@@ -64,6 +64,7 @@ public class MovementHandler : MonoBehaviour
 
     public void OverrideCurve(float speed, AnimationCurve curve, float dir) {
         moving = true;
+        this.dir = dir;
         
         currentCurve = curve;
         curveTime = curve[curve.length - 1].time;
