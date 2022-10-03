@@ -16,6 +16,7 @@ public class PlayerHandler : MonoBehaviour
     [SerializeField] private AnimationCurve rollCurve;
     [SerializeField] private AnimationCurve attackCurve;
     [SerializeField] private GameObject moteTemplate;
+    [SerializeField] private GameObject dustTrailPrefab;
     private List<GameObject> motes = new List<GameObject>();
     private int facing = 1;
     private bool grounded;
@@ -48,12 +49,19 @@ public class PlayerHandler : MonoBehaviour
         }
 
         int prevFacing = facing;
+        bool prevGrounded = grounded;
         grounded = ground.CheckGrounded();
+
+        if (!prevGrounded && grounded) {
+            VFXHandler.Instance.ParticleBuilder(ParticleType.DUST_LAUNCH, transform.position, true, flipX: facing == -1);
+        }
 
         if (InputHandler.Instance.move.pressed && !acting) {
             move.StartAcceleration(InputHandler.Instance.dir);
             if (InputHandler.Instance.dir != 0)
                 facing = (int)InputHandler.Instance.dir;
+            if (grounded)
+                VFXHandler.Instance.ParticleBuilder(ParticleType.DUST_SMALL, (Vector2)transform.position - facing * 2f * Vector2.right, true, flipX: facing == -1);
         } else if (InputHandler.Instance.move.down && !acting) {
             move.UpdateMovement(InputHandler.Instance.dir);
             if (InputHandler.Instance.dir != 0)
@@ -69,6 +77,7 @@ public class PlayerHandler : MonoBehaviour
                 acting = true;
                 move.StartDeceleration();
             } else {
+                VFXHandler.Instance.ParticleBuilder(ParticleType.DUST_ROLL, transform.position, true, flipX: facing == -1);
                 hurtbox.enabled = false;
                 hurtboxMode = HurtboxMode.DODGE;
                 animator.SetTrigger("roll");
@@ -78,8 +87,10 @@ public class PlayerHandler : MonoBehaviour
             SpendEnergy();
         } else if (InputHandler.Instance.primary.pressed && !acting && energy > 0) {
             animator.SetTrigger("attack");
-            if (InputHandler.Instance.dir != 0 && grounded)
+            if (InputHandler.Instance.dir != 0 && grounded) {
+                VFXHandler.Instance.ParticleBuilder(ParticleType.DUST_SMALL, transform.position, true, flipX: facing == -1);
                 move.OverrideCurve(30, attackCurve, InputHandler.Instance.dir);
+            }
             acting = true;
         SpendEnergy();
         } else if (InputHandler.Instance.secondary.pressed && !acting) {
@@ -88,6 +99,7 @@ public class PlayerHandler : MonoBehaviour
                 move.StartDeceleration();
             acting = true;
         } else if (InputHandler.Instance.jump.pressed && grounded && !acting) {
+            Instantiate(dustTrailPrefab, transform);
             jump.StartJump();
             jumpLockout = Time.time + JUMP_LOCK;
             animator.SetTrigger("jump");

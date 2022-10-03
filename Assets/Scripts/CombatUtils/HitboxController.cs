@@ -32,6 +32,10 @@ public class HitboxController : MonoBehaviour
 
         if (createsParticleOnHit) {
             Vector2 dif = other.transform.position - transform.position;
+                if (other.gameObject.layer == LayerMask.NameToLayer("World")) {
+                    dif = transform.position.x - owner.transform.position.x  < 0 ? Vector2.left : Vector2.right;
+                }
+                    
             VFXHandler.Instance.ParticleBuilder(particle, (Vector2)transform.position + 0.5f * dif, true, flipX: dif.x < 0);
         }
 

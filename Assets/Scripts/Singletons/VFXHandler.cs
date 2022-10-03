@@ -28,7 +28,7 @@ public class VFXHandler : Singleton<VFXHandler>
 
         var sprite = particle.GetComponent<SpriteRenderer>();
         sprite.sortingLayerName = layer;
-        sprite.flipX = true;
+        sprite.flipX = flipX;
     }
 
     public void ScreenShake(float duration, float magnitude) {
@@ -49,5 +49,6 @@ public class VFXHandler : Singleton<VFXHandler>
 }
 
 public enum ParticleType {
-    DEFAULT, SPELLBRAND_FIRE, VFX_PARRY, VFX_DEFLECT, VFX_HITSPARK, DEATH_DRONE, VFX_EXPLOSION, 
+    DEFAULT, SPELLBRAND_FIRE, VFX_PARRY, VFX_DEFLECT, VFX_HITSPARK,
+    DEATH_DRONE, VFX_EXPLOSION, DUST_ROLL, DUST_SMALL, DUST_LAUNCH,
 }
