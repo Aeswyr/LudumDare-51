@@ -46,6 +46,8 @@ public class HUDHandler : Singleton<HUDHandler>
         this.conversationCallback = callback;
         typing = true;
         index = 0;
+
+        GameHandler.Instance.GetPlayer().GetComponent<PlayerHandler>().DisableInputs();
     }
 
     void FixedUpdate() {
@@ -62,7 +64,7 @@ public class HUDHandler : Singleton<HUDHandler>
                 typing = false;
         }
 
-        if (InputHandler.Instance.interact.pressed) {
+        if (InputHandler.Instance.any.pressed) {
             if (typing) {
                 typing = false;
                 index = currentConversation[0].text.Length;
@@ -89,5 +91,7 @@ public class HUDHandler : Singleton<HUDHandler>
         this.currentConversation = null;
         this.conversationCallback = null;
         typing = false;
+
+        GameHandler.Instance.GetPlayer().GetComponent<PlayerHandler>().EnableInputs();
     }
 }

@@ -17,6 +17,7 @@ public class PlayerHandler : MonoBehaviour
     [SerializeField] private AnimationCurve attackCurve;
     [SerializeField] private GameObject moteTemplate;
     [SerializeField] private GameObject dustTrailPrefab;
+    [SerializeField] private GameObject sparkburstPrefab;
     private List<GameObject> motes = new List<GameObject>();
     private int facing = 1;
     private bool grounded;
@@ -27,7 +28,7 @@ public class PlayerHandler : MonoBehaviour
     private int energy;
     private const int MAX_ENERGY = 10;
 
-    bool paused = false;
+    bool paused, inputsDisabled;
     float pausedUntil;
     // Start is called before the first frame update
     void Start()
@@ -41,6 +42,9 @@ public class PlayerHandler : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (inputsDisabled)
+            return;
+
         if (Time.time < pausedUntil)
             return;
         if (paused) {
@@ -70,13 +74,13 @@ public class PlayerHandler : MonoBehaviour
             move.StartDeceleration();
         }
 
-        if (InputHandler.Instance.dodge.pressed && grounded && !acting && energy > 0) {
-            if (InputHandler.Instance.dir == 0) {
+        if (InputHandler.Instance.dodge.pressed && grounded && !acting) {
+            if (InputHandler.Instance.dir == 0 && TrySpendEnergy(2)) {
                 hurtboxMode = HurtboxMode.PARRY;
                 animator.SetTrigger("parry");
                 acting = true;
                 move.StartDeceleration();
-            } else {
+            } else if (InputHandler.Instance.dir != 0 && TrySpendEnergy()) {
                 VFXHandler.Instance.ParticleBuilder(ParticleType.DUST_ROLL, transform.position, true, flipX: facing == -1);
                 hurtbox.enabled = false;
                 hurtboxMode = HurtboxMode.DODGE;
@@ -84,15 +88,13 @@ public class PlayerHandler : MonoBehaviour
                 move.OverrideCurve(30, rollCurve, InputHandler.Instance.dir);
                 acting = true;
             }
-            SpendEnergy();
-        } else if (InputHandler.Instance.primary.pressed && !acting && energy > 0) {
+        } else if (InputHandler.Instance.primary.pressed && !acting && TrySpendEnergy(2)) {
             animator.SetTrigger("attack");
             if (InputHandler.Instance.dir != 0 && grounded) {
                 VFXHandler.Instance.ParticleBuilder(ParticleType.DUST_SMALL, transform.position, true, flipX: facing == -1);
                 move.OverrideCurve(30, attackCurve, InputHandler.Instance.dir);
             }
             acting = true;
-        SpendEnergy();
         } else if (InputHandler.Instance.secondary.pressed && !acting) {
             animator.SetTrigger("cast");
             if (grounded)
@@ -121,9 +123,10 @@ public class PlayerHandler : MonoBehaviour
         }
     }
 
-    public void SpendEnergy() {
-            energy--;
-            HUDHandler.Instance.RemoveEnergy();
+    public void SpendEnergy(int amount) {
+            energy -= amount;
+            for (int i = 0; i < amount; i++)
+                HUDHandler.Instance.RemoveEnergy();
     }
 
     public void GainEnergy() {
@@ -155,6 +158,15 @@ public class PlayerHandler : MonoBehaviour
 
     public void EndParryFrames() {
         hurtboxMode = HurtboxMode.DODGE;
+    }
+
+    bool TrySpendEnergy(int amount = 1) {
+        if (energy >= amount) {
+            SpendEnergy(amount);
+            return true;
+        }
+        Instantiate(sparkburstPrefab, transform);
+        return false;
     }
 
     public void OnAttack() {
@@ -207,6 +219,18 @@ public class PlayerHandler : MonoBehaviour
             return;
         
         motes.Add(Instantiate(moteTemplate, moteHolder));
+    }
+
+    public void DisableInputs() {
+        move.ForceStop();
+        jump.ForceLanding();
+        inputsDisabled = true;
+        animator.SetBool("grounded", true);
+        animator.SetBool("running", false);
+    }
+
+    public void EnableInputs() {
+        inputsDisabled = false;
     }
 
     private enum HurtboxMode {

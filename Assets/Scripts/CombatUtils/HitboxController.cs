@@ -10,21 +10,23 @@ public class HitboxController : MonoBehaviour
     Collider2D owner;
     ParticleType particle;
     bool createsParticleOnHit;
-    public void Init(Collider2D owner, bool destroyOnHit, ParticleType particle = ParticleType.DEFAULT) {
+    bool ignoreEnemies;
+    public void Init(Collider2D owner, bool destroyOnHit, ParticleType particle = ParticleType.DEFAULT, bool ignoreEnemies = false) {
         this.owner = owner;
         this.destroyOnHit = destroyOnHit;
         this.particle = particle;
         if (particle != ParticleType.DEFAULT)
-            createsParticleOnHit = true;;
+            createsParticleOnHit = true;
+        this.ignoreEnemies = ignoreEnemies;
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
-        if (other == owner)
+        if (other == owner || ignoreEnemies && other.transform.parent.TryGetComponent(out CombatController tmp))
             return;
 
         if (other.transform.parent.TryGetComponent(out PlayerHandler player))
             player.OnHit(attackData, other);
-        else if (other.transform.parent.TryGetComponent(out CombatController target)) {
+        else if (!ignoreEnemies && other.transform.parent.TryGetComponent(out CombatController target)) {
             target.OnHit(attackData, other);
             if (transform.parent != null && transform.parent.TryGetComponent(out PlayerHandler attackingPlayer))
                 attackingPlayer.HitPause(0.15f);

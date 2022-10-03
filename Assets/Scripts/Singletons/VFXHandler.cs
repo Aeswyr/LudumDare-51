@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class VFXHandler : Singleton<VFXHandler>
 {
+    [SerializeField] private Animator fade;
     [SerializeField] private GameObject particleTemplate;
     [SerializeField] private AnimationClip[] particles;
 
@@ -45,6 +46,14 @@ public class VFXHandler : Singleton<VFXHandler>
         }
 
         Camera.main.transform.position = cameraPos;
+    }
+
+    public void FadeIn() {
+        fade.SetTrigger("fadeOut");
+    }
+
+    public void FadeOut() {
+        fade.SetTrigger("fadeIn");
     }
 }
 

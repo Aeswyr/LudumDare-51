@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7e1b52f5786cbf49889d9018a4d8efb, type: 3}
+  m_Name: Level
+  m_EditorClassIdentifier: 
+  phases:
+  - conversation: {fileID: 11400000, guid: 34abd6d8cae8b184eb3efad3487e7692, type: 2}
+    spawns:
+    - time: 0
+      position: {x: -10, y: 0, z: 0}
+      obj: {fileID: 1329311616076821730, guid: 6996b8388ceceff488efa39f07e4dea3, type: 3}
+    - time: 0
+      position: {x: 10, y: 0, z: 0}
+      obj: {fileID: 1329311616076821730, guid: 6996b8388ceceff488efa39f07e4dea3, type: 3}
+    - time: 5
+      position: {x: 0, y: 0, z: 0}
+      obj: {fileID: 1329311616076821730, guid: 6996b8388ceceff488efa39f07e4dea3, type: 3}
+  - conversation: {fileID: 11400000, guid: 2ce7ebcf21ab7ba4ba9ebbf1eaebaec3, type: 2}
+    spawns: []
+  - conversation: {fileID: 11400000, guid: 61694ac3b3f354b4a934fb56782b9b73, type: 2}
+    spawns: []
+  - conversation: {fileID: 11400000, guid: 7085d03023adf574e8b21b6e9dd929f8, type: 2}
+    spawns: []
+  - conversation: {fileID: 0}
+    spawns: []
+  - conversation: {fileID: 0}
+    spawns: []
+  - conversation: {fileID: 0}
+    spawns: []
+  - conversation: {fileID: 0}
+    spawns: []
+  - conversation: {fileID: 0}
+    spawns: []
+  - conversation: {fileID: 0}
+    spawns: []

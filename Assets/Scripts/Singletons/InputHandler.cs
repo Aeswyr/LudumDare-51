@@ -43,6 +43,10 @@ public class InputHandler : Singleton<InputHandler>
         get {return m_menu;}
     }
 
+    private ButtonState m_any;
+    public ButtonState any {
+        get {return m_any;}
+    }
     private void FixedUpdate() {
         this.m_move.Reset();
         this.m_jump.Reset();
@@ -51,7 +55,7 @@ public class InputHandler : Singleton<InputHandler>
         this.m_dodge.Reset();
         this.m_interact.Reset();
         this.m_menu.Reset();
-
+        this.m_any.Reset();
     }
 
     public void Move(InputAction.CallbackContext ctx) {
@@ -81,6 +85,10 @@ public class InputHandler : Singleton<InputHandler>
 
     public void Menu(InputAction.CallbackContext ctx) {
         this.m_menu.Set(ctx);
+    }
+
+    public void Any(InputAction.CallbackContext ctx) {
+        this.m_any.Set(ctx);
     }
 
     public struct ButtonState {

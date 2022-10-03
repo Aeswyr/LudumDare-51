@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a682199e585fb4249a59906174a8b288, type: 3}
+  m_Name: L00
+  m_EditorClassIdentifier: 
+  conversation:
+  - text: Hey.. Hey! you still with me?
+    name: Operator
+    portrait: {fileID: 0}
+  - text: Think you tripped an alarm, you've got magicorp goons on the way.
+    name: Operator
+    portrait: {fileID: 0}
+  - text: Seems like whatever happened fried your system too.
+    name: Operator
+    portrait: {fileID: 0}
+  - text: Try not to die for a few seconds and I'll see what I can do.
+    name: Operator
+    portrait: {fileID: 0}
+  - text: Attacking and rolling will take power, and if you run out, well...
+    name: Operator
+    portrait: {fileID: 0}
+  - text: Good luck!
+    name: Operator
+    portrait: {fileID: 0}

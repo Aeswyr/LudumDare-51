@@ -280,6 +280,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   moteTemplate: {fileID: 1196510932877550346, guid: 30a1cb153b9947c4f898148712f23505, type: 3}
   dustTrailPrefab: {fileID: 2325920572780906326, guid: bad4ab663f32fc54092bc8b6e34ebae5, type: 3}
+  sparkburstPrefab: {fileID: 7348318354345405403, guid: 911943904eb977443ad1e0923c1397cb, type: 3}
 --- !u!50 &3789905405911222430
 Rigidbody2D:
   serializedVersion: 4
