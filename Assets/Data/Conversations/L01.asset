@@ -22,9 +22,9 @@ MonoBehaviour:
   - text: I can refresh your power every 10 seconds or so through the uplink.
     name: Operator
     portrait: {fileID: 0}
-  - text: Power surge through the uplink should also take out any bots.
+  - text: The power surge should also take out any goons you don't kill.
     name: Operator
     portrait: {fileID: 0}
-  - text: Looks like you've got more goons on the way.
+  - text: Looks like you've got company on the way.
     name: Operator
     portrait: {fileID: 0}

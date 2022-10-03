@@ -25,9 +25,9 @@ public class HitboxController : MonoBehaviour
             return;
 
         if (other.transform.parent.TryGetComponent(out PlayerHandler player))
-            player.OnHit(attackData, other);
+            player.OnHit(attackData, transform);
         else if (!ignoreEnemies && other.transform.parent.TryGetComponent(out CombatController target)) {
-            target.OnHit(attackData, other);
+            target.OnHit(attackData, transform);
             if (transform.parent != null && transform.parent.TryGetComponent(out PlayerHandler attackingPlayer))
                 attackingPlayer.HitPause(0.15f);
         }

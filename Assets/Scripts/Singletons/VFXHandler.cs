@@ -60,4 +60,5 @@ public class VFXHandler : Singleton<VFXHandler>
 public enum ParticleType {
     DEFAULT, SPELLBRAND_FIRE, VFX_PARRY, VFX_DEFLECT, VFX_HITSPARK,
     DEATH_DRONE, VFX_EXPLOSION, DUST_ROLL, DUST_SMALL, DUST_LAUNCH,
+    VFX_SPAWN,
 }

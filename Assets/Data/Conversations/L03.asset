@@ -24,5 +24,9 @@ MonoBehaviour:
     name: Operator
     portrait: {fileID: 0}
   - text: Might also capture a bit of magic energy that you could throw back at 'em.
-    name: 
+    name: Operator
+    portrait: {fileID: 0}
+  - text: Heads up, looks like they're tired of you scrapping bots. There's a security
+      force incoming.
+    name: Operator
     portrait: {fileID: 0}

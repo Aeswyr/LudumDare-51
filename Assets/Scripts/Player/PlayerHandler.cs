@@ -137,6 +137,7 @@ public class PlayerHandler : MonoBehaviour
     }
 
     public void RefillEnergy() {
+        //AudioHandler.Instance.Play(AudioType.REFILL);
         int diff = MAX_ENERGY - energy;
         for (int i = 0; i < diff; i++)
             HUDHandler.Instance.AddEnergy();
@@ -165,6 +166,7 @@ public class PlayerHandler : MonoBehaviour
             SpendEnergy(amount);
             return true;
         }
+        AudioHandler.Instance.Play(AudioType.NOENERGY);
         Instantiate(sparkburstPrefab, transform);
         return false;
     }
@@ -175,18 +177,31 @@ public class PlayerHandler : MonoBehaviour
 
     public void OnCast() {
         if (motes.Count > 0) {
+            AudioHandler.Instance.Play(AudioType.FIREBALL);
             Destroy(motes[0]);
             motes.RemoveAt(0);
             GameHandler.Instance.AttackBuilder(type: AttackType.Fire, owner: hurtbox, destroyOnHit: true, position: (Vector2)transform.position + new Vector2(2 * facing, 0), speed: 40, direction: facing * Vector2.right, particle: ParticleType.VFX_EXPLOSION);
             VFXHandler.Instance.ParticleBuilder(ParticleType.SPELLBRAND_FIRE, moteHolder.transform.position, true, "Motes");
+        } else {
+            AudioHandler.Instance.Play(AudioType.NOENERGY);
         }
     }
 
-    public void OnHit(HitboxData attackData, Collider2D other) {
+    public void OnHit(HitboxData attackData, Transform other) {
         switch (hurtboxMode) {
             case HurtboxMode.HURT:
+                AudioHandler.Instance.Play(AudioType.DEATH);
+                DisableInputs();
+                hurtbox.enabled = false;
+                move.enabled = false;
+                GameHandler.Instance.GetLevel().GetComponent<LevelController>().StopBlock();
+                animator.SetTrigger("dying");
+                transform.position += 0.1f * Vector3.up;
+                transform.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Sign(transform.position.x - other.position.x) * 20, 40);
+                StartCoroutine(DieAndRestart());
             break;
             case HurtboxMode.PARRY:
+                AudioHandler.Instance.Play(AudioType.PARRY);
                 animator.Play("player_parry", 0, normalizedTime: 0.2f);
                 VFXHandler.Instance.ParticleBuilder(ParticleType.VFX_PARRY, (Vector2)transform.position + new Vector2(facing * 1.5f, 0.5f), true);
                 VFXHandler.Instance.ScreenShake(0.1f, 0.1f);
@@ -195,11 +210,39 @@ public class PlayerHandler : MonoBehaviour
                 HitPause(0.15f);
             break;
             case HurtboxMode.DODGE:
+                AudioHandler.Instance.Play(AudioType.PARRY);
                 VFXHandler.Instance.ParticleBuilder(ParticleType.VFX_DEFLECT, (Vector2)transform.position + new Vector2(facing * 1.5f, 0.5f), true);
                 VFXHandler.Instance.ScreenShake(0.1f, 0.05f);
                 HitPause(0.1f);
             break;
         }
+    }
+
+    public IEnumerator DieAndRestart() {
+
+        yield return new WaitUntil(ground.CheckGrounded);
+        animator.SetTrigger("dead");
+        transform.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        
+        yield return new WaitForSeconds(0.5f);
+        VFXHandler.Instance.FadeOut();
+        yield return new WaitForSeconds(1f);
+        
+        GameHandler.Instance.GetLevel().GetComponent<LevelController>().EndBlock();
+        transform.position = new Vector2(0, -4);
+        animator.Play("player_idle");
+
+        while (motes.Count > 0) {
+            Destroy(motes[0]);
+            motes.RemoveAt(0);
+        }
+        yield return new WaitForSeconds(0.5f);
+        VFXHandler.Instance.FadeIn();
+        yield return new WaitForSeconds(1f);
+        move.enabled = true;
+        GameHandler.Instance.GetLevel().GetComponent<LevelController>().StartBlock();
+        EndAction();
+        EnableInputs();
     }
 
     public void HitPause(float duration) {

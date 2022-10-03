@@ -29,13 +29,18 @@ public class LevelController : MonoBehaviour
         if (levelStarted) {
             HUDHandler.Instance.UpdateCountDown(Mathf.CeilToInt(10f - (Time.time - blockStartTime)));
 
-            if (Time.time - blockStartTime > 10) {
+            if (Time.time - blockStartTime > 10 && blockIndex < level.phases.Count - 1) {
+                AudioHandler.Instance.Play(AudioType.EMP);
                 EndBlock();
+                EndSequence();
                 return;
             }
 
             while (spawns.Count > 0 && spawns[0].time <= Time.time - blockStartTime) {
                 Instantiate(spawns[0].obj, objectHolder).transform.position = spawns[0].position;
+                VFXHandler.Instance.ParticleBuilder(ParticleType.VFX_SPAWN, spawns[0].position, true);
+                AudioHandler.Instance.Play(AudioType.TELEPORT);
+
                 spawns.RemoveAt(0);
             }
         }
@@ -66,7 +71,9 @@ public class LevelController : MonoBehaviour
             else
                 Destroy(child.gameObject);
         }
-         EndSequence();
+        foreach (HitboxController obj in FindObjectsOfType<HitboxController>()) {
+            Destroy(obj.gameObject);
+        }
     }
 
     public void EndSequence() {
@@ -77,5 +84,9 @@ public class LevelController : MonoBehaviour
         } else {
             
         }
+    }
+
+    public void StopBlock() {
+        levelStarted = false;
     }
 }

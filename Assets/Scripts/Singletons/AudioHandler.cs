@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class AudioHandler : Singleton<AudioHandler>
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private AudioSource source;
+    [SerializeField] private List<AudioClip> clips;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public void Play(AudioType type) {
+        source.PlayOneShot(clips[(int)type]);
     }
+}
+
+public enum AudioType {
+    HURT, PARRY, DEATH, SELECT, FIREBALL, DRONEATTACK, GUARDATTACK, ASSASSINATTACK, NOENERGY, EMP, REFILL, EVAC, TELEPORT, 
 }

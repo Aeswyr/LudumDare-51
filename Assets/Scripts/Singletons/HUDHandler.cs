@@ -72,6 +72,7 @@ public class HUDHandler : Singleton<HUDHandler>
                 convoText.text = currentConversation[0].text;
 
             } else {
+                AudioHandler.Instance.Play(AudioType.SELECT);
                 index = 0;
                 currentConversation.RemoveAt(0);
                 if (currentConversation.Count > 0) {

@@ -191,6 +191,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baff63ed49f8bac4ea582eb9e717c13c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireDelay: 2
+  fireDelay: 1.5
   animator: {fileID: 6252630807078830329}
   hurtbox: {fileID: 8408415095394273305}
+  sprite: {fileID: -6391555623088342237}

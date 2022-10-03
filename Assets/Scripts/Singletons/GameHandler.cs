@@ -6,6 +6,13 @@ public class GameHandler : Singleton<GameHandler>
 {
     [SerializeField] private GameObject templateAttack;
     [SerializeField] private RuntimeAnimatorController[] attacks;
+
+
+    public void FixedUpdate() {
+        if (InputHandler.Instance.menu.pressed)
+            Application.Quit();
+    }
+    
     public GameObject AttackBuilder(AttackType type = AttackType.Default, Vector3 position = default, Transform parent = null, Collider2D owner = null, float destroyDelay = 0f, bool destroyOnHit = false, float speed = 0, Vector2 direction = default, ParticleType particle = ParticleType.DEFAULT, bool ignoreEnemies = false) {
         GameObject attack;
         if (parent != null) {
@@ -41,10 +48,18 @@ public class GameHandler : Singleton<GameHandler>
         }
         return player;
     }
+
+    GameObject level;
+    public GameObject GetLevel() {
+        if (level == null) {
+            level = FindObjectOfType<LevelController>().gameObject;
+        }
+        return level;
+    }
 }
 
 
 
 public enum AttackType {
-    Default, Fire, Drone
+    Default, Fire, Drone, SecGuard,
 }

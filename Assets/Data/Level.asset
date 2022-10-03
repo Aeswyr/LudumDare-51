@@ -16,29 +16,169 @@ MonoBehaviour:
   - conversation: {fileID: 11400000, guid: 34abd6d8cae8b184eb3efad3487e7692, type: 2}
     spawns:
     - time: 0
-      position: {x: -10, y: 0, z: 0}
-      obj: {fileID: 1329311616076821730, guid: 6996b8388ceceff488efa39f07e4dea3, type: 3}
-    - time: 0
-      position: {x: 10, y: 0, z: 0}
-      obj: {fileID: 1329311616076821730, guid: 6996b8388ceceff488efa39f07e4dea3, type: 3}
-    - time: 5
       position: {x: 0, y: 0, z: 0}
       obj: {fileID: 1329311616076821730, guid: 6996b8388ceceff488efa39f07e4dea3, type: 3}
+    - time: 5
+      position: {x: -10, y: 0, z: 0}
+      obj: {fileID: 1329311616076821730, guid: 6996b8388ceceff488efa39f07e4dea3, type: 3}
+    - time: 5
+      position: {x: 10, y: 0, z: 0}
+      obj: {fileID: 1329311616076821730, guid: 6996b8388ceceff488efa39f07e4dea3, type: 3}
   - conversation: {fileID: 11400000, guid: 2ce7ebcf21ab7ba4ba9ebbf1eaebaec3, type: 2}
-    spawns: []
+    spawns:
+    - time: 0
+      position: {x: -15, y: 0, z: 0}
+      obj: {fileID: 1329311616076821730, guid: 6996b8388ceceff488efa39f07e4dea3, type: 3}
+    - time: 0
+      position: {x: 15, y: 0, z: 0}
+      obj: {fileID: 1329311616076821730, guid: 6996b8388ceceff488efa39f07e4dea3, type: 3}
+    - time: 5
+      position: {x: 15, y: 0, z: 0}
+      obj: {fileID: 1329311616076821730, guid: 6996b8388ceceff488efa39f07e4dea3, type: 3}
+    - time: 5
+      position: {x: -15, y: 0, z: 0}
+      obj: {fileID: 1329311616076821730, guid: 6996b8388ceceff488efa39f07e4dea3, type: 3}
   - conversation: {fileID: 11400000, guid: 61694ac3b3f354b4a934fb56782b9b73, type: 2}
-    spawns: []
+    spawns:
+    - time: 0
+      position: {x: 0, y: 5, z: 0}
+      obj: {fileID: 1329311616076821730, guid: 6996b8388ceceff488efa39f07e4dea3, type: 3}
+    - time: 2
+      position: {x: 12, y: 0, z: 0}
+      obj: {fileID: 1329311616076821730, guid: 6996b8388ceceff488efa39f07e4dea3, type: 3}
+    - time: 2
+      position: {x: -12, y: 0, z: 0}
+      obj: {fileID: 1329311616076821730, guid: 6996b8388ceceff488efa39f07e4dea3, type: 3}
+    - time: 6
+      position: {x: 12, y: 5, z: 0}
+      obj: {fileID: 1329311616076821730, guid: 6996b8388ceceff488efa39f07e4dea3, type: 3}
+    - time: 6
+      position: {x: -12, y: 5, z: 0}
+      obj: {fileID: 1329311616076821730, guid: 6996b8388ceceff488efa39f07e4dea3, type: 3}
   - conversation: {fileID: 11400000, guid: 7085d03023adf574e8b21b6e9dd929f8, type: 2}
-    spawns: []
-  - conversation: {fileID: 0}
-    spawns: []
-  - conversation: {fileID: 0}
-    spawns: []
-  - conversation: {fileID: 0}
-    spawns: []
-  - conversation: {fileID: 0}
-    spawns: []
-  - conversation: {fileID: 0}
-    spawns: []
-  - conversation: {fileID: 0}
-    spawns: []
+    spawns:
+    - time: 0
+      position: {x: 15, y: -4, z: 0}
+      obj: {fileID: 1329311616076821730, guid: 7601de565c335be4799b7b46754661a9, type: 3}
+    - time: 3
+      position: {x: -15, y: -4, z: 0}
+      obj: {fileID: 1329311616076821730, guid: 7601de565c335be4799b7b46754661a9, type: 3}
+    - time: 5
+      position: {x: 15, y: -4, z: 0}
+      obj: {fileID: 1329311616076821730, guid: 7601de565c335be4799b7b46754661a9, type: 3}
+  - conversation: {fileID: 11400000, guid: 54210f5c8bc14d54fb484d9a8b0d1daf, type: 2}
+    spawns:
+    - time: 0
+      position: {x: 15, y: -4, z: 0}
+      obj: {fileID: 1329311616076821730, guid: 7601de565c335be4799b7b46754661a9, type: 3}
+    - time: 0.5
+      position: {x: 14, y: 0, z: 0}
+      obj: {fileID: 1329311616076821730, guid: 6996b8388ceceff488efa39f07e4dea3, type: 3}
+    - time: 3
+      position: {x: 0, y: 5, z: 0}
+      obj: {fileID: 1329311616076821730, guid: 6996b8388ceceff488efa39f07e4dea3, type: 3}
+    - time: 6
+      position: {x: -15, y: -4, z: 0}
+      obj: {fileID: 1329311616076821730, guid: 7601de565c335be4799b7b46754661a9, type: 3}
+    - time: 6.5
+      position: {x: -14, y: 0, z: 0}
+      obj: {fileID: 1329311616076821730, guid: 6996b8388ceceff488efa39f07e4dea3, type: 3}
+  - conversation: {fileID: 11400000, guid: 08c207c00f21af747ad8eb8153e40b87, type: 2}
+    spawns:
+    - time: 0
+      position: {x: 15, y: -4, z: 0}
+      obj: {fileID: 1329311616076821730, guid: 7601de565c335be4799b7b46754661a9, type: 3}
+    - time: 0.5
+      position: {x: 14, y: 0, z: 0}
+      obj: {fileID: 1329311616076821730, guid: 6996b8388ceceff488efa39f07e4dea3, type: 3}
+    - time: 3
+      position: {x: -15, y: -4, z: 0}
+      obj: {fileID: 1329311616076821730, guid: 7601de565c335be4799b7b46754661a9, type: 3}
+    - time: 3.5
+      position: {x: -14, y: 0, z: 0}
+      obj: {fileID: 1329311616076821730, guid: 6996b8388ceceff488efa39f07e4dea3, type: 3}
+    - time: 6.5
+      position: {x: 15, y: -4, z: 0}
+      obj: {fileID: 1329311616076821730, guid: 7601de565c335be4799b7b46754661a9, type: 3}
+    - time: 7
+      position: {x: 14, y: 0, z: 0}
+      obj: {fileID: 1329311616076821730, guid: 6996b8388ceceff488efa39f07e4dea3, type: 3}
+  - conversation: {fileID: 11400000, guid: 94f377a23820f444fa30324e0b3f4e91, type: 2}
+    spawns:
+    - time: 0
+      position: {x: 15, y: -4, z: 0}
+      obj: {fileID: 1329311616076821730, guid: a70d3fd93aaeb684ca0455ba3d7c450a, type: 3}
+    - time: 5
+      position: {x: -15, y: -4, z: 0}
+      obj: {fileID: 1329311616076821730, guid: a70d3fd93aaeb684ca0455ba3d7c450a, type: 3}
+  - conversation: {fileID: 11400000, guid: 0ea79e57afd63254d9c4f778245cfdf3, type: 2}
+    spawns:
+    - time: 0
+      position: {x: 0, y: 5, z: 0}
+      obj: {fileID: 1329311616076821730, guid: 6996b8388ceceff488efa39f07e4dea3, type: 3}
+    - time: 0
+      position: {x: -10, y: -4, z: 0}
+      obj: {fileID: 1329311616076821730, guid: 7601de565c335be4799b7b46754661a9, type: 3}
+    - time: 0
+      position: {x: -10, y: -4, z: 0}
+      obj: {fileID: 1329311616076821730, guid: 7601de565c335be4799b7b46754661a9, type: 3}
+    - time: 5
+      position: {x: 15, y: -4, z: 0}
+      obj: {fileID: 1329311616076821730, guid: 7601de565c335be4799b7b46754661a9, type: 3}
+    - time: 5
+      position: {x: -15, y: -4, z: 0}
+      obj: {fileID: 1329311616076821730, guid: 7601de565c335be4799b7b46754661a9, type: 3}
+  - conversation: {fileID: 11400000, guid: 2077545a3308abf4cb138a19caef2db3, type: 2}
+    spawns:
+    - time: 0
+      position: {x: 0, y: 5, z: 0}
+      obj: {fileID: 1329311616076821730, guid: 6996b8388ceceff488efa39f07e4dea3, type: 3}
+    - time: 2
+      position: {x: 10, y: -4, z: 0}
+      obj: {fileID: 1329311616076821730, guid: 7601de565c335be4799b7b46754661a9, type: 3}
+    - time: 2
+      position: {x: -10, y: -4, z: 0}
+      obj: {fileID: 1329311616076821730, guid: a70d3fd93aaeb684ca0455ba3d7c450a, type: 3}
+    - time: 6
+      position: {x: -15, y: -4, z: 0}
+      obj: {fileID: 1329311616076821730, guid: 7601de565c335be4799b7b46754661a9, type: 3}
+    - time: 6
+      position: {x: 15, y: -4, z: 0}
+      obj: {fileID: 1329311616076821730, guid: a70d3fd93aaeb684ca0455ba3d7c450a, type: 3}
+  - conversation: {fileID: 11400000, guid: 10458d83ede581546a9f951f1e97e1e9, type: 2}
+    spawns:
+    - time: 0
+      position: {x: 12, y: 5, z: 0}
+      obj: {fileID: 1329311616076821730, guid: 6996b8388ceceff488efa39f07e4dea3, type: 3}
+    - time: 0
+      position: {x: -12, y: 5, z: 0}
+      obj: {fileID: 1329311616076821730, guid: 6996b8388ceceff488efa39f07e4dea3, type: 3}
+    - time: 2
+      position: {x: 15, y: -4, z: 0}
+      obj: {fileID: 1329311616076821730, guid: a70d3fd93aaeb684ca0455ba3d7c450a, type: 3}
+    - time: 2
+      position: {x: -15, y: -4, z: 0}
+      obj: {fileID: 1329311616076821730, guid: a70d3fd93aaeb684ca0455ba3d7c450a, type: 3}
+    - time: 4.5
+      position: {x: 12, y: -4, z: 0}
+      obj: {fileID: 1329311616076821730, guid: 7601de565c335be4799b7b46754661a9, type: 3}
+    - time: 5
+      position: {x: 11, y: 0, z: 0}
+      obj: {fileID: 1329311616076821730, guid: 6996b8388ceceff488efa39f07e4dea3, type: 3}
+    - time: 5.5
+      position: {x: -12, y: -4, z: 0}
+      obj: {fileID: 1329311616076821730, guid: 7601de565c335be4799b7b46754661a9, type: 3}
+    - time: 6
+      position: {x: -11, y: 0, z: 0}
+      obj: {fileID: 1329311616076821730, guid: 6996b8388ceceff488efa39f07e4dea3, type: 3}
+    - time: 8
+      position: {x: 15, y: -4, z: 0}
+      obj: {fileID: 1329311616076821730, guid: a70d3fd93aaeb684ca0455ba3d7c450a, type: 3}
+    - time: 8
+      position: {x: -15, y: -4, z: 0}
+      obj: {fileID: 1329311616076821730, guid: a70d3fd93aaeb684ca0455ba3d7c450a, type: 3}
+  - conversation: {fileID: 11400000, guid: 4714e3a75c198a544bd5693c5900c4e5, type: 2}
+    spawns:
+    - time: 0
+      position: {x: 0, y: -4, z: 0}
+      obj: {fileID: 6350576704318263016, guid: faa963052017c904a95537d61f010fd1, type: 3}
