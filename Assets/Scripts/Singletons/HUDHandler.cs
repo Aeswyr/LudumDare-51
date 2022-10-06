@@ -65,6 +65,7 @@ public class HUDHandler : Singleton<HUDHandler>
         }
 
         if (InputHandler.Instance.any.pressed) {
+            InputHandler.Instance.FlushBuffer();
             if (typing) {
                 typing = false;
                 index = currentConversation[0].text.Length;

@@ -18,6 +18,7 @@ public class PlayerHandler : MonoBehaviour
     [SerializeField] private GameObject moteTemplate;
     [SerializeField] private GameObject dustTrailPrefab;
     [SerializeField] private GameObject sparkburstPrefab;
+    [SerializeField] private GameObject afterImagePrefab;
     private List<GameObject> motes = new List<GameObject>();
     private int facing = 1;
     private bool grounded;
@@ -60,7 +61,7 @@ public class PlayerHandler : MonoBehaviour
             VFXHandler.Instance.ParticleBuilder(ParticleType.DUST_LAUNCH, transform.position, true, flipX: facing == -1);
         }
 
-        if (InputHandler.Instance.move.pressed && !acting) {
+        if (!acting && InputHandler.Instance.move.pressed) {
             move.StartAcceleration(InputHandler.Instance.dir);
             if (InputHandler.Instance.dir != 0)
                 facing = (int)InputHandler.Instance.dir;
@@ -70,14 +71,17 @@ public class PlayerHandler : MonoBehaviour
             move.UpdateMovement(InputHandler.Instance.dir);
             if (InputHandler.Instance.dir != 0)
                 facing = (int)InputHandler.Instance.dir;
-        } else if (InputHandler.Instance.move.released && !acting) {
+        } else if (!acting && InputHandler.Instance.move.released) {
             move.StartDeceleration();
         }
 
-        if (InputHandler.Instance.dodge.pressed && grounded && !acting) {
+        if (grounded && !acting && InputHandler.Instance.dodge.pressed) {
             if (InputHandler.Instance.dir == 0 && TrySpendEnergy(2)) {
+                hurtbox.offset = facing * Vector2.right;
+                ((BoxCollider2D)hurtbox).size = 2.5f * Vector2.one;
                 hurtboxMode = HurtboxMode.PARRY;
                 animator.SetTrigger("parry");
+                StartCoroutine(CreateAfterimages(2/12f, 1/12f));
                 acting = true;
                 move.StartDeceleration();
             } else if (InputHandler.Instance.dir != 0 && TrySpendEnergy()) {
@@ -86,21 +90,25 @@ public class PlayerHandler : MonoBehaviour
                 hurtboxMode = HurtboxMode.DODGE;
                 animator.SetTrigger("roll");
                 move.OverrideCurve(30, rollCurve, InputHandler.Instance.dir);
+                StartCoroutine(CreateAfterimages(4/12f, 1/12f));
                 acting = true;
             }
-        } else if (InputHandler.Instance.primary.pressed && !acting && TrySpendEnergy(2)) {
+        } else if (!acting && InputHandler.Instance.primary.pressed && TrySpendEnergy(2)) {
             animator.SetTrigger("attack");
             if (InputHandler.Instance.dir != 0 && grounded) {
+                StartCoroutine(CreateAfterimages(2/12f, 1/12f));
                 VFXHandler.Instance.ParticleBuilder(ParticleType.DUST_SMALL, transform.position, true, flipX: facing == -1);
                 move.OverrideCurve(30, attackCurve, InputHandler.Instance.dir);
+            } else if (!grounded) {
+                StartCoroutine(CreateAfterimages(2/12f, 1/12f));
             }
             acting = true;
-        } else if (InputHandler.Instance.secondary.pressed && !acting) {
+        } else if (!acting && InputHandler.Instance.secondary.pressed) {
             animator.SetTrigger("cast");
             if (grounded)
                 move.StartDeceleration();
             acting = true;
-        } else if (InputHandler.Instance.jump.pressed && grounded && !acting) {
+        } else if (!acting && grounded && InputHandler.Instance.jump.pressed) {
             Instantiate(dustTrailPrefab, transform);
             jump.StartJump();
             jumpLockout = Time.time + JUMP_LOCK;
@@ -113,6 +121,18 @@ public class PlayerHandler : MonoBehaviour
         if (prevFacing != facing) {
             StartCoroutine(MoveMote(facing * -1));
             sprite.flipX = facing == -1;
+        }
+    }
+
+    private IEnumerator CreateAfterimages(float duration, float delay) {
+        float time = 0;
+        while (time < duration) {
+                var afterImage = Instantiate(afterImagePrefab, transform.position, Quaternion.identity);
+                var asprite = afterImage.GetComponent<SpriteRenderer>();
+                asprite.sprite = sprite.sprite;
+                asprite.flipX = sprite.flipX;
+            yield return new WaitForSeconds(delay);
+            time += delay;
         }
     }
 
@@ -146,7 +166,10 @@ public class PlayerHandler : MonoBehaviour
 
     public void EndAction() {
         acting = false;
+
         hurtbox.enabled = true;
+        hurtbox.offset = Vector2.zero;
+        ((BoxCollider2D)hurtbox).size = 1.5f * Vector2.one;
 
         hurtboxMode = HurtboxMode.HURT;
 
@@ -219,6 +242,7 @@ public class PlayerHandler : MonoBehaviour
     }
 
     public IEnumerator DieAndRestart() {
+        hurtbox.enabled = false;
 
         yield return new WaitUntil(ground.CheckGrounded);
         animator.SetTrigger("dead");
@@ -241,6 +265,7 @@ public class PlayerHandler : MonoBehaviour
         yield return new WaitForSeconds(1f);
         move.enabled = true;
         GameHandler.Instance.GetLevel().GetComponent<LevelController>().StartBlock();
+        
         EndAction();
         EnableInputs();
     }
