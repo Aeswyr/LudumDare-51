@@ -43,6 +43,6 @@ public class DroneController : MonoBehaviour
 
     void FireAttack() {
         AudioHandler.Instance.Play(AudioType.DRONEATTACK);
-        GameHandler.Instance.AttackBuilder(AttackType.Drone, transform.position, owner: hurtbox, destroyOnHit: true, speed: 15, direction: (GameHandler.Instance.GetPlayer().transform.position - transform.position).normalized, ignoreEnemies: true);
+        GameHandler.Instance.AttackBuilder(AttackType.Drone, new Vector2(2, 2), transform.position, owner: hurtbox, destroyOnHit: true, speed: 15, direction: (GameHandler.Instance.GetPlayer().transform.position - transform.position).normalized, ignoreEnemies: true);
     }
 }

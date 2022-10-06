@@ -55,6 +55,10 @@ public class VFXHandler : Singleton<VFXHandler>
     public void FadeOut() {
         fade.SetTrigger("fadeIn");
     }
+
+    public void ScreenBlackout(bool state) {
+        fade.gameObject.SetActive(state);
+    }
 }
 
 public enum ParticleType {

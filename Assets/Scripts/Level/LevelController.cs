@@ -20,6 +20,7 @@ public class LevelController : MonoBehaviour
     }
 
     private IEnumerator StartupSequence() {
+        VFXHandler.Instance.ScreenBlackout(true);
         VFXHandler.Instance.FadeIn();
         yield return new WaitForSeconds(1.5f);
         StartSequence();

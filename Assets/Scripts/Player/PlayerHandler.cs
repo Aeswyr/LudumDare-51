@@ -172,7 +172,7 @@ public class PlayerHandler : MonoBehaviour
     }
 
     public void OnAttack() {
-        GameHandler.Instance.AttackBuilder(owner: hurtbox, parent: transform, destroyDelay: (1/6f), position: new Vector2(2 * facing, 0), particle: ParticleType.VFX_HITSPARK);
+        GameHandler.Instance.AttackBuilder(size: new Vector2(4, 3), owner: hurtbox, parent: transform, destroyDelay: (1/6f), position: new Vector2(1.5f * facing, 0), particle: ParticleType.VFX_HITSPARK);
     }
 
     public void OnCast() {
@@ -180,7 +180,7 @@ public class PlayerHandler : MonoBehaviour
             AudioHandler.Instance.Play(AudioType.FIREBALL);
             Destroy(motes[0]);
             motes.RemoveAt(0);
-            GameHandler.Instance.AttackBuilder(type: AttackType.Fire, owner: hurtbox, destroyOnHit: true, position: (Vector2)transform.position + new Vector2(2 * facing, 0), speed: 40, direction: facing * Vector2.right, particle: ParticleType.VFX_EXPLOSION);
+            GameHandler.Instance.AttackBuilder(type: AttackType.Fire, new Vector2(3, 2), owner: hurtbox, destroyOnHit: true, position: (Vector2)transform.position + new Vector2(2 * facing, 0), speed: 40, direction: facing * Vector2.right, particle: ParticleType.VFX_EXPLOSION);
             VFXHandler.Instance.ParticleBuilder(ParticleType.SPELLBRAND_FIRE, moteHolder.transform.position, true, "Motes");
         } else {
             AudioHandler.Instance.Play(AudioType.NOENERGY);

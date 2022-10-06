@@ -34,6 +34,6 @@ public class SecGuardController : MonoBehaviour
 
     void FireAttack() {
         AudioHandler.Instance.Play(AudioType.GUARDATTACK);
-        GameHandler.Instance.AttackBuilder(AttackType.SecGuard, transform.position, owner: hurtbox, destroyOnHit: true, speed: 70, direction: Mathf.Sign((GameHandler.Instance.GetPlayer().transform.position - transform.position).x) * Vector2.right, ignoreEnemies: true);
+        GameHandler.Instance.AttackBuilder(AttackType.SecGuard, new Vector2(3, 1), transform.position, owner: hurtbox, destroyOnHit: true, speed: 70, direction: Mathf.Sign((GameHandler.Instance.GetPlayer().transform.position - transform.position).x) * Vector2.right, ignoreEnemies: true);
     }
 }

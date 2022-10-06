@@ -13,7 +13,7 @@ public class GameHandler : Singleton<GameHandler>
             Application.Quit();
     }
     
-    public GameObject AttackBuilder(AttackType type = AttackType.Default, Vector3 position = default, Transform parent = null, Collider2D owner = null, float destroyDelay = 0f, bool destroyOnHit = false, float speed = 0, Vector2 direction = default, ParticleType particle = ParticleType.DEFAULT, bool ignoreEnemies = false) {
+    public GameObject AttackBuilder(AttackType type = AttackType.Default, Vector2 size = default, Vector3 position = default, Transform parent = null, Collider2D owner = null, float destroyDelay = 0f, bool destroyOnHit = false, float speed = 0, Vector2 direction = default, ParticleType particle = ParticleType.DEFAULT, bool ignoreEnemies = false) {
         GameObject attack;
         if (parent != null) {
             attack = Instantiate(templateAttack, parent);
@@ -36,6 +36,10 @@ public class GameHandler : Singleton<GameHandler>
 
         if (speed > 0) {
             attack.AddComponent<ProjectileController>().Init(speed, direction);
+        }
+
+        if (size != default) {
+            attack.GetComponent<BoxCollider2D>().size = size;
         }
 
         return attack;

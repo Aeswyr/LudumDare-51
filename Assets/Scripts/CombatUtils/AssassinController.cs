@@ -58,7 +58,7 @@ public class AssassinController : MonoBehaviour
     }
 
     void FireAttack() {
-        GameHandler.Instance.AttackBuilder(AttackType.SecGuard, facing * 1.5f * Vector2.right, transform, owner: hurtbox, destroyDelay: 2/12f, ignoreEnemies: true);
+        GameHandler.Instance.AttackBuilder(AttackType.SecGuard, new Vector2(3, 3), facing * 1.5f * Vector2.right, transform, owner: hurtbox, destroyDelay: 2/12f, ignoreEnemies: true);
         attacking = true;
     }
 }
