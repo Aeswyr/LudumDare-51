@@ -13,6 +13,9 @@ public class LevelController : MonoBehaviour
     bool levelStarted;
     float blockStartTime;
 
+    int score, baseScore;
+
+
 
     void Start() {
         GameHandler.Instance.GetPlayer().GetComponent<PlayerHandler>().DisableInputs();
@@ -78,6 +81,9 @@ public class LevelController : MonoBehaviour
     }
 
     public void EndSequence() {
+        AddScore(200 * GameHandler.Instance.GetPlayer().GetComponent<PlayerHandler>().GetEnergy());
+        baseScore = score;
+        HUDHandler.Instance.SetScore(score);
         blockIndex++;
 
         if (blockIndex < level.phases.Count) {
@@ -89,5 +95,24 @@ public class LevelController : MonoBehaviour
 
     public void StopBlock() {
         levelStarted = false;
+    }
+
+    public void AddScore(int amt) {
+        score += amt;
+        HUDHandler.Instance.SetScore(score);
+    }
+
+    public void ResetScore() {
+        score = baseScore;
+        HUDHandler.Instance.SetScore(score);
+    }
+
+    public void ResetAndSubtractScore(int amt) {
+        score -= amt;
+        if (score < 0)
+            score = 0;
+        baseScore = Mathf.Min(baseScore, score);
+        score = baseScore;
+        HUDHandler.Instance.SetScore(score);
     }
 }

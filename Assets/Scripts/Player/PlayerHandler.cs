@@ -243,6 +243,7 @@ public class PlayerHandler : MonoBehaviour
 
     public IEnumerator DieAndRestart() {
         hurtbox.enabled = false;
+        GameHandler.Instance.GetLevel().GetComponent<LevelController>().ResetAndSubtractScore(1500);
 
         yield return new WaitUntil(ground.CheckGrounded);
         animator.SetTrigger("dead");
@@ -299,6 +300,10 @@ public class PlayerHandler : MonoBehaviour
 
     public void EnableInputs() {
         inputsDisabled = false;
+    }
+
+    public int GetEnergy() {
+        return energy;
     }
 
     private enum HurtboxMode {

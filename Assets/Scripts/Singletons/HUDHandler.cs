@@ -11,6 +11,7 @@ public class HUDHandler : Singleton<HUDHandler>
     [SerializeField] private Transform energyHolder;
     [SerializeField] private GameObject energyPrefab;
     [SerializeField] private TextMeshProUGUI countDown;
+    [SerializeField] private  TextMeshProUGUI score;
     [Header("TextBox")]
     [SerializeField] private GameObject textBox;
     [SerializeField] private TextMeshProUGUI convoText;
@@ -23,6 +24,10 @@ public class HUDHandler : Singleton<HUDHandler>
     int index = 0;
 
     private List<GameObject> energy = new List<GameObject>();
+
+    public void SetScore(int amt) {
+        score.text = amt.ToString("00000000");
+    }
 
     public void AddEnergy() {
         energy.Add(Instantiate(energyPrefab, energyHolder));
