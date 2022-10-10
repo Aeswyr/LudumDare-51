@@ -5,129 +5,115 @@ using UnityEngine;
 
 public class InputHandler : Singleton<InputHandler>
 {
-    [SerializeField] protected short bufferFrames = 5;
-    [SerializeField] protected bool bufferEnabled = false;
     public float dir {
         get;
         private set;
     }
-    private ButtonState m_move = new();
     public ButtonState move {
-        get{return m_move;}
+        get{return buttons[0];}
     }
-    private ButtonState m_jump = new();
     public ButtonState jump {
-        get{return m_jump;}
+        get{return buttons[1];}
     }
-
-    private ButtonState m_primary = new();
     public ButtonState primary {
-        get {return m_primary;}
+        get {return buttons[2];}
     }
-
-    private ButtonState m_secondary = new();
     public ButtonState secondary {
-        get {return m_secondary;}
+        get {return buttons[3];}
     }
-
-    private ButtonState m_dodge = new();
     public ButtonState dodge {
-        get {return m_dodge;}
+        get {return buttons[4];}
     }
-
-    private ButtonState m_interact = new();
     public ButtonState interact {
-        get {return m_interact;}
+        get {return buttons[5];}
     }
-
-    private ButtonState m_menu = new();
     public ButtonState menu {
-        get {return m_menu;}
+        get {return buttons[6];}
+    }
+    public ButtonState any {
+        get {return buttons[7];}
     }
 
-    private ButtonState m_any = new();
-    public ButtonState any {
-        get {return m_any;}
+    [SerializeField] private int buttonCount = 1;
+    [SerializeField] private short bufferFrames = 5;
+    [SerializeField] private bool bufferEnabled = false;
+    private short IDSRC = 0;
+    private ButtonState[] buttons;
+    private Queue<Dictionary<short, short>> inputBuffer = new Queue<Dictionary<short, short>>();
+    private Dictionary<short, short> currentFrame;
+
+    public void Start() {
+        buttons = new ButtonState[buttonCount];
+        for (int i = 0; i < buttonCount; i++)
+            buttons[i].Init(ref IDSRC, this);
     }
+
     private void FixedUpdate() {
-        this.m_move.Reset();
-        this.m_jump.Reset();
-        this.m_primary.Reset();
-        this.m_secondary.Reset();
-        this.m_dodge.Reset();
-        this.m_interact.Reset();
-        this.m_menu.Reset();
-        this.m_any.Reset();
+        for (int i = 0; i < buttonCount; i++)
+            buttons[i].Reset();
 
         if (bufferEnabled) {
-            ButtonState.UpdateBuffer(bufferFrames);
+            UpdateBuffer();
         }
     }
 
     public void Move(InputAction.CallbackContext ctx) {
         this.dir = ctx.ReadValue<float>();
-        this.m_move.Set(ctx);
+        this.buttons[0].Set(ctx);
     }
 
     public void Jump(InputAction.CallbackContext ctx) {
-        this.m_jump.Set(ctx);
+        this.buttons[1].Set(ctx);
     }
 
     public void Primary(InputAction.CallbackContext ctx) {
-        this.m_primary.Set(ctx);
+        this.buttons[2].Set(ctx);
     }
 
     public void Secondary(InputAction.CallbackContext ctx) {
-        this.m_secondary.Set(ctx);
+        this.buttons[3].Set(ctx);
     }
 
     public void Dodge(InputAction.CallbackContext ctx) {
-        this.m_dodge.Set(ctx);
+        this.buttons[4].Set(ctx);
     }
 
     public void Interact(InputAction.CallbackContext ctx) {
-        this.m_interact.Set(ctx);
+        this.buttons[5].Set(ctx);
     }
 
     public void Menu(InputAction.CallbackContext ctx) {
-        this.m_menu.Set(ctx);
+        this.buttons[6].Set(ctx);
     }
 
     public void Any(InputAction.CallbackContext ctx) {
-        this.m_any.Set(ctx);
+        this.buttons[7].Set(ctx);
     }
 
     public void FlushBuffer() {
-        ButtonState.FlushBuffer();
+        inputBuffer.Clear();
     }
 
-    public class ButtonState {
-        private short id = IDSRC++;
-        private static short IDSRC = 0;
+    public void UpdateBuffer() {
+        if (inputBuffer.Count >= bufferFrames)
+            inputBuffer.Dequeue();
+        currentFrame = new Dictionary<short, short>();
+        inputBuffer.Enqueue(currentFrame);
+    }
+
+    public void PrintBuffer() {
+        string bufferData = $"InputBuffer: count-{inputBuffer.Count}";
+        foreach (var frame in inputBuffer)
+            if (frame.Count > 0)
+                bufferData += $"\n{frame.Count}";
+        Debug.Log(bufferData);
+    }
+
+    public struct ButtonState {
+        private short id;
         private static short    STATE_PRESSED = 0,
                                 STATE_RELEASED = 1;
-        private static Queue<Dictionary<short, short>> inputBuffer = new Queue<Dictionary<short, short>>();
-        private static Dictionary<short, short> currentFrame;
-        public static void UpdateBuffer(short bufferFrames) {
-            //PrintBuffer();
-            if (inputBuffer.Count >= bufferFrames)
-                inputBuffer.Dequeue();
-            currentFrame = new Dictionary<short, short>();
-            inputBuffer.Enqueue(currentFrame);
-        }
-
-        public static void FlushBuffer() {
-            inputBuffer.Clear();
-        }
-
-        public static void PrintBuffer() {
-            string bufferData = $"InputBuffer: count-{inputBuffer.Count}";
-            foreach (var frame in inputBuffer)
-                if (frame.Count > 0)
-                    bufferData += $"\n{frame.Count}";
-            Debug.Log(bufferData);
-        }
-
+        private InputHandler handler;
         private bool firstFrame;
         public bool down {
             get;
@@ -135,8 +121,8 @@ public class InputHandler : Singleton<InputHandler>
         }
         public bool pressed {
             get {
-                if (InputHandler.Instance.bufferEnabled && inputBuffer.Count > 0) {
-                    foreach (var frame in inputBuffer) {
+                if (InputHandler.Instance.bufferEnabled && handler.inputBuffer != null) {
+                    foreach (var frame in handler.inputBuffer) {
                         if (frame.ContainsKey(id) && frame[id] == STATE_PRESSED) {
                             Debug.Log(id);
                             return frame.Remove(id);
@@ -150,8 +136,8 @@ public class InputHandler : Singleton<InputHandler>
 
         public bool released {
             get {
-                if (InputHandler.Instance.bufferEnabled && inputBuffer.Count > 0) {
-                    foreach (var frame in inputBuffer) {
+                if (InputHandler.Instance.bufferEnabled && handler.inputBuffer != null) {
+                    foreach (var frame in handler.inputBuffer) {
                         if (frame.ContainsKey(id) && frame[id] == STATE_RELEASED) {
                             Debug.Log(id);
                             return frame.Remove(id);
@@ -167,12 +153,18 @@ public class InputHandler : Singleton<InputHandler>
             down = !ctx.canceled;             
             firstFrame = true;
 
-            if (InputHandler.Instance.bufferEnabled && inputBuffer.Count > 0) {
-                currentFrame.TryAdd(id, down ? STATE_PRESSED : STATE_RELEASED);
+            if (handler.bufferEnabled && handler.currentFrame != null) {
+                handler.currentFrame.TryAdd(id, down ? STATE_PRESSED : STATE_RELEASED);
             }
         }
+        
         public void Reset() {
             firstFrame = false;
+        }
+
+        public void Init(ref short IDSRC, InputHandler handler) {
+            id = IDSRC++;
+            this.handler = handler;
         }
     }
 }

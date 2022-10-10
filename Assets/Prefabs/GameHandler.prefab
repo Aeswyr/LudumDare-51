@@ -49,6 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11550a6338ea9014480c0a2dfdaa3503, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buttonCount: 8
   bufferFrames: 10
   bufferEnabled: 1
 --- !u!114 &1270362344671178572
