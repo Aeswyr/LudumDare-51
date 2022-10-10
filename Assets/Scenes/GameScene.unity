@@ -6220,6 +6220,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2297809660962203879, guid: 901c8e774fd3fe540b426f6aef4f0e8d, type: 3}
+      propertyPath: risingCurve.m_Curve.Array.data[0].inSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2297809660962203879, guid: 901c8e774fd3fe540b426f6aef4f0e8d, type: 3}
+      propertyPath: risingCurve.m_Curve.Array.data[1].inSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2297809660962203879, guid: 901c8e774fd3fe540b426f6aef4f0e8d, type: 3}
+      propertyPath: risingCurve.m_Curve.Array.data[0].outSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2297809660962203879, guid: 901c8e774fd3fe540b426f6aef4f0e8d, type: 3}
+      propertyPath: risingCurve.m_Curve.Array.data[1].outSlope
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4707435507531593776, guid: 901c8e774fd3fe540b426f6aef4f0e8d, type: 3}
       propertyPath: m_RootOrder
       value: 4
